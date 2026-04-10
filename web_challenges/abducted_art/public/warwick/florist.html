@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Abducted Art</title>
+  </head>
+  <body>
+    <h1>Florist</h1>
+    <p>
+      Hi! I'm the town florist! Let me know if you need anything! Our tulips are
+      in season again, they're around the back of the <b>garden</b>! All we hold
+      are paylogs, you can look up the quantity of the items we've sold here.
+      Here's what we sell:
+    </p>
+    <ul>
+      <li>Rose Bouquet</li>
+      <li>Spider Lily</li>
+      <li>Lily</li>
+      <li>Tulip</li>
+      <li>Wildflower Wreath</li>
+      <li>Dried Herbs</li>
+    </ul>
+    <div style="display: flex; gap: 2">
+      <input type="text" id="code" placeholder="object" />
+      <button onclick="submit()">Submit</button>
+    </div>
+    <p id="msg"></p>
+    <script>
+      async function submit() {
+        const val = document.getElementById("code").value;
+
+        const res = await fetch("/warwick/florist.html/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: `{ "item": "${val}" }`,
+        });
+
+        const data = await res.json();
+        document.getElementById("msg").innerText = data;
+      }
+    </script>
+  </body>
+</html>

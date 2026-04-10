@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Abducted Art</title>
+  </head>
+  <body>
+    <h1>Pub</h1>
+    <p>
+      Need a beer? You're old enough alright. Here's the menu, you're welcome to
+      check how much we've sold of each:
+    </p>
+    <ul>
+      <li>Keg of Ale</li>
+      <li>Bottle of Mead</li>
+      <li>Bowl of Stew</li>
+      <li>Roasted Boar</li>
+      <li>Spiced Wine</li>
+      <li>Croquettes</li>
+      <li>Soup</li>
+    </ul>
+    <div style="display: flex; gap: 2">
+      <input type="text" id="code" placeholder="object" />
+      <button onclick="submit()">Submit</button>
+    </div>
+    <p id="msg"></p>
+    <script>
+      async function submit() {
+        const val = document.getElementById("code").value;
+
+        const res = await fetch("/warwick/pub.html/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: `{ "item": "${val}" }`,
+        });
+
+        const data = await res.json();
+        document.getElementById("msg").innerText = data;
+      }
+    </script>
+  </body>
+</html>

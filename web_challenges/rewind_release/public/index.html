@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rewind Release</title>
+  </head>
+  <body>
+    <div class="vault-box">
+      <h1>Ancient Vault</h1>
+      <p>The ancient chronomancers sealed this vault long ago.</p>
+      <p><i>"The vault will only open during the total solar eclipse of 1347."</i></p>
+      
+      <button onclick="tryOpenVault()">Attempt to Open Vault</button>
+      
+      <p id="result"></p>
+    </div>
+
+    <script>
+      async function tryOpenVault() {
+        const resultBox = document.getElementById("result");
+        resultBox.style.color = "white";
+        resultBox.innerText = "Consulting the sundial...";
+
+        const currentTime = new Date().toISOString(); 
+
+        try {
+          const response = await fetch('/api/vault/open', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ local_time: currentTime })
+          });
+
+          const data = await response.json();
+
+          if (data.success) {
+            resultBox.style.color = "#4CAF50"; 
+          } else {
+            resultBox.style.color = "#f44336"; 
+          }
+          resultBox.innerText = data.message;
+        } catch (err) {
+          resultBox.style.color = "#f44336";
+          resultBox.innerText = "The magic faded. Connection lost.";
+        }
+      }
+    </script>
+  </body>
+</html>

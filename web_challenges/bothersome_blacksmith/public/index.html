@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bothersome Blacksmith</title>
+</head>
+<body>
+    <h1>Blacksmith's Shop</h1>
+    <p>Ask him to sharpen your sword.</p>
+    
+    <input type="text" id="code" placeholder="question">
+    <button onclick="submit()">Submit</button>
+    <p id="msg"></p>
+
+    <script>
+        async function submit() {
+            const val = document.getElementById('code').value;
+            const res = await fetch('/api/submit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `code=${val}`
+            });
+            const data = await res.json();
+            document.getElementById('msg').innerText = data.message || data.flag;
+        }
+    </script>
+</body>
+</html>

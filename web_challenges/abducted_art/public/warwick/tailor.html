@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Abducted Art</title>
+  </head>
+  <body>
+    <h1>Tailor</h1>
+    <p>
+      Hi! I'm the town tailor! Our formal clothes are in the front of the store
+      and the regular clothes are around the back. Please let me know if there's
+      anything you need fixed. Here's a list of the stuff we sell, you're
+      welcome to check how much we've sold:
+    </p>
+    <ul>
+      <li>Linen Shirt</li>
+      <li>Leather Belt</li>
+      <li>Wool Tunic</li>
+      <li>Silk Scarf</li>
+      <li>Winter Cloak</li>
+      <li>Dark Cloak</li>
+    </ul>
+    <div style="display: flex; gap: 2">
+      <input type="text" id="code" placeholder="object" />
+      <button onclick="submit()">Submit</button>
+    </div>
+    <p id="msg"></p>
+    <script>
+      async function submit() {
+        const val = document.getElementById("code").value;
+
+        const res = await fetch("/warwick/tailor.html/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: `{ "item": "${val}" }`,
+        });
+
+        const data = await res.json();
+        document.getElementById("msg").innerText = data;
+      }
+    </script>
+  </body>
+</html>

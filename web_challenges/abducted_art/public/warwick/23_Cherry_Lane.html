@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abducted Art</title>
+</head>
+<body>
+    <h1>23 Cherry Lane</h1>
+    <p>What do you want?</p>
+    <div style="display: flex; gap: 2">
+      <input type="text" id="code" />
+      <button onclick="submit()">Submit</button>
+    </div>
+    <p id="msg"></p>
+    <script>
+      async function submit() {
+        const val = document.getElementById("code").value;
+
+        const res = await fetch("/warwick/23_Cherry_Lane.html/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: `{ "message": "${val}" }`,
+        });
+
+        const data = await res.json();
+        document.getElementById("msg").innerText = data;        
+      }
+    </script>
+</body>
+</html>

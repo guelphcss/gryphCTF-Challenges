@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Abducted Art</title>
+  </head>
+  <body>
+    <h1>Blacksmith</h1>
+    <p>
+      Hey, what do you need fixed? Or are you here to buy something? Let me know
+      if there's anything you'd like to inquire about. Here's what we sell:
+    </p>
+    <!-- hidden_items -->
+     <ul>
+      <li>Iron Sword</li>
+      <li>Steel Shield</li>
+      <li>Iron Arrows</li>
+      <li>Horseshoes</li>
+     </ul>
+     <div style="display: flex; gap: 2">
+      <input type="text" id="code" placeholder="object" />
+      <button onclick="submit()">Submit</button>
+    </div>
+    <p id="msg"></p>
+    <script>
+      async function submit() {
+        const val = document.getElementById("code").value;
+
+        const res = await fetch("/warwick/blacksmith.html/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: `{ "item": "${val}" }`,
+        });
+
+        const data = await res.json();
+        document.getElementById("msg").innerText = data;        
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Abducted Art</title>
+  </head>
+  <body>
+    <h1>Bakery</h1>
+    <p>
+      Hi! I'm the town Baker! We got bread, we got baguettes, we have
+      <b>cookies</b>, we have everything! <abbr title="/">Ask</abbr> me if you
+      need anything. We have a new honey roll if you'd like to try it out! All we hold are paylogs, you can look
+      up the quantity of the items we've sold here. Here's what we sell:
+    </p>
+    <ul>
+      <li>Loaf of Bread</li>
+      <li>Sweet Roll</li>
+      <li>Meat Pie</li>
+      <li>Apple Tart</li>
+      <li>Scone</li>
+      <li>Rye Bread</li>
+    </ul>
+    <div style="display: flex; gap: 2">
+      <input type="text" id="code" placeholder="object" />
+      <button onclick="submit()">Submit</button>
+    </div>
+    <p id="msg"></p>
+     <script>
+      async function submit() {
+        const val = document.getElementById("code").value;
+
+        const res = await fetch("/warwick/baker.html/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: `{ "item": "${val}" }`,
+        });
+
+        const data = await res.json();
+        document.getElementById("msg").innerText = data;        
+      }
+    </script>
+  </body>
+</html>
