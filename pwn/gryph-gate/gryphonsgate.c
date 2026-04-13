@@ -19,14 +19,14 @@ void win() {
 
 int main() {
     int authenticated = 0;
-    char buffer[64]; // the buffer we are going to overflow *.*
+    char buffer[64];
 
     setbuf(stdout, NULL); 
     printf("\033[38;5;93m╔═══════════════════════════════════════╗\033[0m\n");
     printf("\033[38;5;93m║\033[1;38;5;93m    Welcome to the Gates of Gryphon    \033[38;5;93m║\033[0m\n");
     printf("\033[38;5;93m╚═══════════════════════════════════════╝\033[0m\n");
     printf("Enter passcode: ");
-    gets(buffer); // VERY BAD, DO NOT EVER USE GETS
+    gets(buffer);
 
     if (authenticated != 0) {
         win();
