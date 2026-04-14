@@ -1,0 +1,1 @@
+A legendary painting of the Gryphon has been recovered from the ruins. The artist was known for hiding truths where few thought to look, and it is rumored to be the vessel for a message that only the worthy can extract.
